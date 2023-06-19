@@ -1,0 +1,101 @@
+<!--
+  Copyright (C) 2014-2023, kaki
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  1. Redistributions of source code must retain the above copyright notice,
+     this list of conditions and the following disclaimer.
+
+  2. Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in the
+     documentation and/or other materials provided with the distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+  TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="application-name" content="POKiDEX" />
+    <script charset="utf-8" type="text/javascript" src="roma.js"></script>
+    <script charset="utf-8" type="text/javascript" src="pokemon.js"></script>
+    <script charset="utf-8" type="text/javascript" src="complete.js"></script>
+    <script charset="utf-8" type="text/javascript" src="keymap.js"></script>
+    <script charset="utf-8" type="text/javascript" src="pokidex.js"></script>
+    <link rel="stylesheet" type="text/css" href="pokidex.css" />
+    <title>POKiDEX</title>
+  </head>
+  <body>
+    <header>
+      <h1>POKiDEX</h1>
+    </header>
+    <nav id="index">
+      <h2>索引</h2>
+      <ul id="index-list"></ul>
+    </nav>
+    <section>
+      <form name="pokidex">
+        <fieldset name="direct"><legend>表示</legend></fieldset>
+        <fieldset name="search"><legend>検索</legend></fieldset>
+        <fieldset name="others"><legend>その他</legend></fieldset>
+      </form>
+      <aside id="echo-area">JavaScriptを有効にしてください。</aside>
+    </section>
+    <article id="help-document">
+      <section>
+        <h3>概要</h3>
+        <p>クリスタル版&amp;ピカチュウ版ポケモン図鑑です。</p>
+        <p>図鑑や検索結果は複数表示することができ、自動では閉じられません。</p>
+        <p>画面右にある索引から、表示した図鑑や検索結果にジャンプすることもできます。</p>
+      </section>
+      <section>
+        <h3>ローマ字入力補完</h3>
+        <p>種族名と技名はローマ字入力で補完できます。補完はTabやEnterを押した時に行われます。</p>
+        <p>例: <kbd>his<kbd>Tab</kbd></kbd> → <samp>ひっさつまえば</samp></p>
+        <p>例: <kbd>his<kbd>Enter</kbd></kbd> → <samp>ひっさつまえば</samp> と同時に表示/検索を実行</p>
+      </section>
+      <section>
+        <h3>検索</h3>
+        <dl>
+          <dt>両立検索</dt>
+          <dd>技の両立ルートを探索し、得られた探索結果とともに表示します。</dd>
+          <dt>AND検索</dt>
+          <dd>それぞれの技をいずれも覚えられるポケモンを検索します。両立できるかは問いません。</dd>
+        </dl>
+      </section>
+      <section>
+        <h3>キーバインド一覧</h3>
+        <div id="keybind-list"><p>ここにキーバインド一覧が生成されるはず</p></div>
+      </section>
+      <section>
+        <h3>動作環境</h3>
+        <p>Firefox 113以降推奨。Chromeでもきっと動く。</p>
+      </section>
+      <section>
+        <h3>FAQ</h3>
+        <dl class="faq">
+          <dt>クリスタルと金銀で覚える技が違うポケモンの扱いは</dt>
+          <dd>クリスタル版では各種わざマシンを使っても覚えられない技を金銀版で覚える場合のみ記載しています。また、赤緑には対応していません。</dd>
+          <dt>ピカチュウの旧作技マシンにあるなみのりとは</dt>
+          <dd>ポケモンスタジアムの教え技です。</dd>
+        </dl>
+      </section>
+    </article>
+    <section id="result"></section>
+  </body>
+</html>

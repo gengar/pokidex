@@ -1,0 +1,166 @@
+/*
+ *   Copyright (C) 2014-2023, kaki
+ *
+ *   Redistribution and use in source and binary forms, with or without
+ *   modification, are permitted provided that the following conditions
+ *   are met:
+ *
+ *   1. Redistributions of source code must retain the above copyright notice,
+ *      this list of conditions and the following disclaimer.
+ *
+ *   2. Redistributions in binary form must reproduce the above copyright
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
+ *
+ *   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ *  “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ *   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ *   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ *   HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ *   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ *   TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ *   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ *   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+body {
+    /* background-color: paleturquoise; */
+    background-color: #b8e9e9;
+    background-color: oklch(90% 0.056 196);
+}
+
+form {
+    display: inline-flex;
+    /* background-color: silver; */
+    background-color: #f2ffff;
+    background-color: oklch(99% 0.014 196);
+}
+
+.input-boxes {
+    display: flex;
+}
+
+.input-box {
+    /* display: box; */
+    margin-right: 1em;
+}
+
+.input-box > * {
+    display: block;
+}
+
+input[type="text"] {
+    margin-top: 1px;
+}
+input[name="search-reset"] {
+    float: right;
+}
+
+article {
+    border: solid 2px;
+    margin-top: 4px;
+    padding: 1em;
+    background-color: khaki;
+    background-color: oklch(91.35% 0.112 102.83);
+}
+
+.pokidex-box {
+    display: flex;
+}
+
+.pokidex-block {
+    border: solid 1px;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: calc(224px + 4em);
+    background-color: white;
+}
+
+.pokidex-icon {
+    margin: 1em;
+}
+
+.pokidex-icon-block {
+    display: flex;
+}
+
+.pokidex-ev-list {
+    list-style-type: "→ "
+}
+
+.result-headline {
+    font-weight: normal;
+}
+
+.search-item {
+    font-weight: bold;
+}
+
+.search-compat-result-wrapper {
+    display: inline-flex;
+    width: 100%;
+}
+
+.search-compat-result-link {
+    min-width: 6em;
+}
+
+.search-compat-result-state-nodes {
+    width: 100%;
+    padding-left: 2em;
+    /* background-color: lemonchiffon; */
+    background-color: #fcf7cc;
+    background-color: oklch(97% 0.056 102.83);
+}
+
+.search-compat-result-state-node {
+}
+
+#index {
+    position: fixed;
+    top: 0;
+    right: 0;
+    /* background-color: skyblue; */
+    background-color: #53d4d5;
+    background-color: oklch(82% 0.112 196);
+}
+
+#input-types {
+}
+
+#input-moves {
+}
+
+#echo-area {
+    margin-left: 2em;
+    /* border: 1px solid; */
+    columns: auto;
+}
+
+#help-document {
+    display: none;
+    /* background-color: lightcyan; */
+    background-color: #f2ffff;
+    background-color: oklch(99% 0.014 196);
+}
+
+kbd > kbd {
+    margin-left: 1ex;
+    margin-right: 1ex;
+}
+
+dl.faq > dt::before {
+    font-weight: bold;
+    content: "Q. ";
+}
+
+dl.faq > dd::before {
+    font-weight: bold;
+    content: "A. "
+}
+
+dd {
+    margin-bottom: 1em;
+}
