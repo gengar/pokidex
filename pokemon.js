@@ -702,10 +702,11 @@ class DistPokemon {
     new DistPokemon(78, 40, [53, 84, 24, 7], false, true),
     new DistPokemon(129, 15, [151, 83], false, true),
     new DistPokemon(54, 15, [11, 134], false, true)];
+
+  static poke = [];
+  static {
+    this.list.forEach(dist => {
+      this.poke[dist.poke] = true;
+    });
+  }
 }
-
-DistPokemon.poke = [];
-
-DistPokemon.list.forEach(dist => {
-  DistPokemon.poke[dist.poke] = true;
-});
