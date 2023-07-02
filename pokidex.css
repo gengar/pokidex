@@ -107,6 +107,10 @@ article {
     min-width: 6em;
 }
 
+.search-compat-result-link-sorted {
+    min-width: 8em;
+}
+
 .search-compat-result-state-nodes {
     width: 100%;
     padding-left: 2em;

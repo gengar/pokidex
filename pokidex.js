@@ -397,6 +397,27 @@ function arrayDifference(nd, er) {
   return nd.filter(i => !er.includes(i));
 }
 
+function toSortedBy(ary, key, compare = (m, n) => m - n) {
+  return ary.map(e =>
+    [key(e), e]
+  ).sort(([a, ], [b, ]) =>
+    compare(a, b)
+  ).map(
+    ([, e]) => e
+  );
+}
+
+function sortFunctions(order) {
+  const [, name, method, ord] = /(?:([habcds])|(sum)\(\))([<>])/.exec(order);
+  const key = method ?
+        x => x[method]() :
+        x => x[name];
+  const compare = ord === "<" ?
+        (m, n) => m - n :
+        (m, n) => n - m;
+  return [key, compare];
+}
+
 function filterLearningsBySelf(requirements, alist, level = 100) {
   return arrayDifference(requirements,
                          takeWhile(alist, t => t[0] <= level).
@@ -453,15 +474,23 @@ function pokeCanLearnMovesProduct0(poke, moves, level = 100) {
   return rest.length <= 0;
 }
 
-function pokeCanLearnMovesProduct(page, pokes0, moves, lv, types, eggGroups) {
+function pokeCanLearnMovesProduct(page, pokes0, moves, lv, types, eggGroups, order) {
   const pokes = pokes0.filter(poke => pokeCanLearnMovesProduct0(poke, moves, lv));
-
+  const sortFuncs = order && sortFunctions(order);
   const ul = document.createElement("ul");
-  for (const link of pokes.map(poke => makeTextLinkToPokidex(poke.name, page))) {
+
+  (order ?
+   (([key, compare]) => toSortedBy(pokes, key, compare))(sortFuncs) :
+   pokes
+  ).forEach(poke => {
+    const link = makeTextLinkToPokidex(poke.name, page);
+    if (order) {
+      link.appendChild(document.createTextNode(`(${sortFuncs[0](poke)})`));
+    }
     const li = document.createElement("li");
     li.appendChild(link);
     ul.appendChild(li);
-  }
+  });
   page.appendChild(ul);
 }
 
@@ -695,14 +724,24 @@ function pokeCanLearnMovesCompatibly0(poke, lv, moves) {
   }
 }
 
-function pokeCanLearnMovesCompatibly(page, pokes, moves, lv, types, eggGroups) {
+function pokeCanLearnMovesCompatibly(page, pokes, moves, lv, types, eggGroups, order) {
+  const sortFuncs = order && sortFunctions(order);
   const results = pokes.map(poke => [poke, pokeCanLearnMovesCompatibly0(poke, lv, moves.map(move => move.id))]).filter(r => r[1]);
 
   const ul = document.createElement("ul");
-  results.forEach(([poke, result]) => {
+  (order ?
+   (([key, compare]) => toSortedBy(results, ([p, ]) => key(p), compare))(sortFuncs) :
+   results
+  ).forEach(([poke, result]) => {
     if (result) {
       const link = makeTextLinkToPokidex(poke.name, page);
-      link.className = "search-compat-result-link";
+      if (order) {
+        link.appendChild(document.createTextNode(`(${sortFuncs[0](poke)})`));
+        link.className = "search-compat-result-link-sorted";
+      }
+      else {
+        link.className = "search-compat-result-link";
+      }
       const li = makeElement("li");
 
       const wrapper = makeElement("div", {"className": "search-compat-result-wrapper"});
@@ -758,6 +797,7 @@ function search() {
   const eggGroups = [pokidex.egg1.value, pokidex.egg2.value].filter(
     x => x
   ).map(x => parseInt(x));
+  const order = document.pokidex.sort.value;
   const pokes = (pokidex.poke1.value ? [PokeData.fromName(pokidex.poke1.value)] : PokeData.raw).filter(
     poke => types.every(
       type => type === poke.type1 || type === poke.type2
@@ -796,12 +836,15 @@ function search() {
                                   "ポケモン"),
                                  "の",
                                  item(modeName),
-                                 "検索"));
+                                 "検索",
+                                ...(order ?
+                                    [`(ソート: ${document.pokidex.sort.selectedOptions[0].textContent})`] :
+                                    [])));
 
     if (pokes.length === 0 && document.pokidex.poke1.value && (types.length || eggGroups.length)) {
       page.appendChild(makeElement("p", null, "# 種族と、タイプまたはタマゴグループが同時に指定されています"));
     }
-    f(page, pokes, moves, lv, types, eggGroups);
+    f(page, pokes, moves, lv, types, eggGroups, order);
   });
 }
 
@@ -1114,6 +1157,22 @@ window.addEventListener("DOMContentLoaded", function (ev) {
 
       sform.appendChild(makeElement("div", null,
                                     makeInputButton("button-search", "検索", withErrorHandler(search)),
+                                    makeSelectFromArray("sort", {
+                                      "h>": "H>",
+                                      "h<": "H<",
+                                      "a>": "A>",
+                                      "a<": "A<",
+                                      "b>": "B>",
+                                      "b<": "B<",
+                                      "c>": "C>",
+                                      "c<": "C<",
+                                      "d>": "D>",
+                                      "d<": "D<",
+                                      "s>": "S>",
+                                      "s<": "S<",
+                                      "sum()>": "合計>",
+                                      "sum()<": "合計<"
+                                    }, "ソート"),
                                     makeInputButton("search-reset", "リセット", withErrorHandler(() => {
                                       if (confirm("入力をリセットしますか？")) {
                                         for (const e of document.pokidex.search.querySelectorAll('input[type="text"], input[type="number"], select')) {
