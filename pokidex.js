@@ -696,10 +696,10 @@ function pokeCanLearnMovesCompatibly0(poke, lv, moves) {
 }
 
 function pokeCanLearnMovesCompatibly(page, pokes, moves, lv, types, eggGroups) {
-  const ul = document.createElement("ul");
-  pokes.forEach(poke => {
-    const result = pokeCanLearnMovesCompatibly0(poke, lv, moves.map(move => move.id));
+  const results = pokes.map(poke => [poke, pokeCanLearnMovesCompatibly0(poke, lv, moves.map(move => move.id))]).filter(r => r[1]);
 
+  const ul = document.createElement("ul");
+  results.forEach(([poke, result]) => {
     if (result) {
       const link = makeTextLinkToPokidex(poke.name, page);
       link.className = "search-compat-result-link";
