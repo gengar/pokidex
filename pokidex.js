@@ -26,7 +26,7 @@
  */
 
 'use strict';
-const pokidexVersion = "0.1.1";
+const pokidexVersion = "0.2.0-alpha";
 
 function message(str) {
   const echoArea = document.querySelector("#echo-area");
