@@ -1115,12 +1115,13 @@ window.addEventListener("DOMContentLoaded", function (ev) {
       sform.appendChild(makeElement("div", null,
                                     makeInputButton("button-search", "検索", withErrorHandler(search)),
                                     makeInputButton("search-reset", "リセット", withErrorHandler(() => {
-                                      for (const e of document.pokidex.search.querySelectorAll('input[type="text"], input[type="number"], select')) {
-                                        e.value = e.dataset.default ?? "";
-                                      }
-                                      initSearchMode();
-                                      message("");
-      }))));
+                                      if (confirm("入力をリセットしますか？")) {
+                                        for (const e of document.pokidex.search.querySelectorAll('input[type="text"], input[type="number"], select')) {
+                                          e.value = e.dataset.default ?? "";
+                                        }
+                                        initSearchMode();
+                                        message("");
+                                      }}))));
 
       chMove.activate();
     }
