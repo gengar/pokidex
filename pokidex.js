@@ -105,12 +105,12 @@ function makeCheckbox(name, text) {
                      makeElement("label", {"htmlFor": name}, text));
 }
 
-function makeSelectFromArray(name, ary, none) {
+function makeSelect(name, obj, none) {
   const select = document.createElement("select");
   select.name = name;
   select.appendChild(makeElement("option", {"value": ""}, none));
-  for (const i in ary) {
-    select.appendChild(makeElement("option", {"value": i}, ary[i]));
+  for (const i in obj) {
+    select.appendChild(makeElement("option", {"value": i}, obj[i]));
   }
   return select;
 }
@@ -1137,10 +1137,10 @@ window.addEventListener("DOMContentLoaded", function (ev) {
       inputBoxes.appendChild(
         makeInputBox("input-types",
                      makeInputNumber("lv", 3, 2, 100, 55),
-                     makeSelectFromArray("type1", PokeData.type, "タイプ"),
-                     makeSelectFromArray("type2", PokeData.type, "タイプ"),
-                     makeSelectFromArray("egg1", PokeData.eggGroup, "タマゴグループ"),
-                     makeSelectFromArray("egg2", PokeData.eggGroup, "タマゴグループ")));
+                     makeSelect("type1", PokeData.type, "タイプ"),
+                     makeSelect("type2", PokeData.type, "タイプ"),
+                     makeSelect("egg1", PokeData.eggGroup, "タマゴグループ"),
+                     makeSelect("egg2", PokeData.eggGroup, "タマゴグループ")));
       inputBoxes.appendChild(
         makeInputBox("input-moves",
                      makeInputText("poke1", 5, "ポケモン", chPoke),
@@ -1157,7 +1157,7 @@ window.addEventListener("DOMContentLoaded", function (ev) {
 
       sform.appendChild(makeElement("div", null,
                                     makeInputButton("button-search", "検索", withErrorHandler(search)),
-                                    makeSelectFromArray("sort", {
+                                    makeSelect("sort", {
                                       "h>": "H>",
                                       "h<": "H<",
                                       "a>": "A>",
